@@ -1,4 +1,6 @@
 # audio-recorder-for-next.js
 
 Usage:
-import Recorder from '../components/
+
+import Recorder from '../components/testRecComp;
+
