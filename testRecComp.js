@@ -190,7 +190,6 @@ const audioRecorder =  () => {
                 <ErrAudio 
                  data={errInAudio}
                 />
-                <p>Äänitä ja lähetä, voit poistaa raidan roskakori napista</p>
                <audio id="noise"></audio>
                <Draggable>
                <div className={styles.mainCard}>
