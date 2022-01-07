@@ -3,11 +3,8 @@ import styles from '../styles/Home.module.css'
 import React from 'react';
 import Head from 'next/head';
 import ErrAudio from '../components/errorAudio';
-import Draggable from 'react-draggable';
 
-
-
-const TestRec =  () => {
+const audioRecorder =  () => {
     let source
     let recorder;
     let audio;    
@@ -33,33 +30,18 @@ const TestRec =  () => {
 
                 source = audioCtx.createMediaStreamSource(stream1);
                 source.connect(analyser);
-                //analyser.connect(distortion);
-                //distortion.connect(audioCtx.destination);
-
                 analyser.fftSize = 2048;
                 var bufferLength = analyser.frequencyBinCount;
                 var dataArray = new Uint8Array(bufferLength);
 
                 analyser.getByteTimeDomainData(dataArray);
 
-                
-                
-
                 let canvas = document.getElementById("canvas");
                 let canvasCtx = canvas.getContext("2d");
                 
                 const WIDTH = canvas.width;
                 const HEIGHT = canvas.height;
-
-                /*
-                canvasCtx.fillStyle = '#F0DB4F';
-                canvasCtx.strokeStyle = 'red';
-                 // draw a rectangle with fill and stroke
-                canvasCtx.fillRect(50, 50, 150, 100);
-                canvasCtx.strokeRect(50, 50, 150, 100);
-                */
-                //canvasCtx.clearRect(0, 0, WIDTH, HEIGHT);
-                
+   
                 function draw() {
                     var drawVisual = requestAnimationFrame(draw);
                     analyser.getByteTimeDomainData(dataArray);
@@ -143,7 +125,6 @@ const TestRec =  () => {
         
         setAudioUrl('')
         setRecordBlob('')
-        //setMicOn(true)
         try {
         if (!recorder) {
             recorder = await recordAudio();
@@ -176,7 +157,6 @@ const TestRec =  () => {
         audio.play()
     }
     const sendData = async () => {
-        //console.log(recordUrl)
         if (recordBlob.length == 0){
             setErrInAudio("No audio file to send, record again")
             setTimeout(() => {
@@ -260,4 +240,4 @@ function getFileName(fileExtension) {
     return  year + month + date + millSecond + '.' + fileExtension;
 }
 
-export default TestRec;
+export default audioRecorder;
